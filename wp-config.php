@@ -13,47 +13,29 @@
  * * Database table prefix
  * * ABSPATH
  *
- * @link https://codex.wordpress.org/Editing_wp-config.php
+ * @link https://wordpress.org/support/article/editing-wp-config-php/
  *
  * @package WordPress
  */
 
-//Using environment variables for DB connection information
-
-$connectstr_dbhost = '';
-$connectstr_dbname = '';
-$connectstr_dbusername = '';
-$connectstr_dbpassword = '';
-
-foreach ($_SERVER as $key => $value) {
-    if (strpos($key, "MYSQLCONNSTR_") !== 0) {
-        continue;
-    }
-    
-    $connectstr_dbhost = preg_replace("/^.*Data Source=(.+?);.*$/", "\\1", $value);
-    $connectstr_dbname = preg_replace("/^.*Database=(.+?);.*$/", "\\1", $value);
-    $connectstr_dbusername = preg_replace("/^.*User Id=(.+?);.*$/", "\\1", $value);
-    $connectstr_dbpassword = preg_replace("/^.*Password=(.+?)$/", "\\1", $value);
-}
-
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('DB_NAME', $connectstr_dbname);
+define( 'DB_NAME', 'wpesmax' );
 
 /** MySQL database username */
-define('DB_USER', $connectstr_dbusername);
+define( 'DB_USER', 'root' );
 
 /** MySQL database password */
-define('DB_PASSWORD', $connectstr_dbpassword);
+define( 'DB_PASSWORD', 'root' );
 
 /** MySQL hostname */
-define('DB_HOST', $connectstr_dbhost);
+define( 'DB_HOST', 'localhost' );
 
 /** Database Charset to use in creating database tables. */
-define('DB_CHARSET', 'utf8');
+define( 'DB_CHARSET', 'utf8' );
 
 /** The Database Collate type. Don't change this if in doubt. */
-define('DB_COLLATE', '');
+define( 'DB_COLLATE', '' );
 
 /**#@+
  * Authentication Unique Keys and Salts.
@@ -64,24 +46,14 @@ define('DB_COLLATE', '');
  *
  * @since 2.6.0
  */
-define('AUTH_KEY',         'put your unique phrase here');
-define('SECURE_AUTH_KEY',  'put your unique phrase here');
-define('LOGGED_IN_KEY',    'put your unique phrase here');
-define('NONCE_KEY',        'put your unique phrase here');
-define('AUTH_SALT',        'put your unique phrase here');
-define('SECURE_AUTH_SALT', 'put your unique phrase here');
-define('LOGGED_IN_SALT',   'put your unique phrase here');
-define('NONCE_SALT',       'put your unique phrase here');
-
-
-/* Security for Wordpress : 
-you may wish to disable the plugin or theme editor to prevent overzealous users from being able to edit sensitive files and 
-potentially crash the site. Disabling these also provides an additional layer of security if a hacker gains access to a 
-well-privileged user account.
-Note : If your plugin or theme you use with your app requires editing of the files , comment the line below for 'DISALLOW_FILE_EDIT'
-*/
-define('DISALLOW_FILE_EDIT', true);
-
+define('AUTH_KEY',         '{GXeGmn%^7Q^D$c-{J3J1pTJ1XZI9Y+x{^%-%G,x]Xkd43%(G|:mhK:{M/{9IE)9');
+define('SECURE_AUTH_KEY',  'JFSH)?*I+lc;Sp)|e]%VO,qD{LVkef7x_[ujLd0cnG~tNvMD(N)p+;f1tv%0.%{.');
+define('LOGGED_IN_KEY',    '[DWYB)Uu]LV:WQ J~*+0di[/At;J(B>~B[E-JY0]b:lT,b!pIvMKX2@U-A(E8&tG');
+define('NONCE_KEY',        '`pUDc}0Qqx8{rr#bv,GMb<rO  };m>U`gJHI_w?!@f/mvfrN%-|+--L,_T$y^vxD');
+define('AUTH_SALT',        'o3q?f>H3.eJp+)>fej+F#%r+S8r]+%Pb)+Q4-(B-M2_T*^_H}B>n&~C&+(&.9wU|');
+define('SECURE_AUTH_SALT', 'oc[,l6EY0H/0_*L<+.Uy?re2wnzr~!|V:EC<?s4km%j&0Aj>;+LeFm{CIDCL;ptk');
+define('LOGGED_IN_SALT',   'e:)(=ounl}vk&zlS.,>NTA8_(.+%stPHQC(-!-HMiX9UtK_?!$/N;J_|[D[+3$Bw');
+define('NONCE_SALT',       '~14SzPV!{8gXmCYkj_)e .mX@#*X,#EK+y##;E|b,hOw2B+S>~+)7.*(0@$xA>CB');
 
 /**#@-*/
 
@@ -91,7 +63,7 @@ define('DISALLOW_FILE_EDIT', true);
  * You can have multiple installations in one database if you give each
  * a unique prefix. Only numbers, letters, and underscores please!
  */
-$table_prefix  = 'wp_';
+$table_prefix = 'wp_';
 
 /**
  * For developers: WordPress debugging mode.
@@ -101,24 +73,18 @@ $table_prefix  = 'wp_';
  * in their development environments.
  *
  * For information on other constants that can be used for debugging,
- * visit the Codex.
+ * visit the documentation.
  *
- * @link https://codex.wordpress.org/Debugging_in_WordPress
+ * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
-define('WP_DEBUG', false);
+define( 'WP_DEBUG', false );
 
-/* That's all, stop editing! Happy blogging. */
-
-//Relative URLs for swapping across app service deployment slots 
-define('WP_HOME', 'http://'. filter_input(INPUT_SERVER, 'HTTP_HOST', FILTER_SANITIZE_STRING));
-define('WP_SITEURL', 'http://'. filter_input(INPUT_SERVER, 'HTTP_HOST', FILTER_SANITIZE_STRING));
-define('WP_CONTENT_URL', '/wp-content');
-define('DOMAIN_CURRENT_SITE', filter_input(INPUT_SERVER, 'HTTP_HOST', FILTER_SANITIZE_STRING));
-
+/* That's all, stop editing! Happy publishing. */
 
 /** Absolute path to the WordPress directory. */
-if ( !defined('ABSPATH') )
-	define('ABSPATH', dirname(__FILE__) . '/');
+if ( ! defined( 'ABSPATH' ) ) {
+	define( 'ABSPATH', __DIR__ . '/' );
+}
 
 /** Sets up WordPress vars and included files. */
-require_once(ABSPATH . 'wp-settings.php');
+require_once ABSPATH . 'wp-settings.php';
